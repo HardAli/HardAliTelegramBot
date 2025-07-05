@@ -12,6 +12,7 @@ async_session = sessionmaker(engine, expire_on_commit=False, class_=AsyncSession
 
 Base = declarative_base()
 
+
 class Student(Base):
     __tablename__ = "students"
     id = Column(Integer, primary_key=True)
@@ -20,6 +21,7 @@ class Student(Base):
     registered_at = Column(DateTime, default=datetime.utcnow)
 
     assignments = relationship("Assignment", back_populates="student")
+
 
 class Assignment(Base):
     __tablename__ = "assignments"
@@ -31,6 +33,7 @@ class Assignment(Base):
 
     student = relationship("Student", back_populates="assignments")
     submissions = relationship("Submission", back_populates="assignment")
+
 
 class Submission(Base):
     __tablename__ = "submissions"
